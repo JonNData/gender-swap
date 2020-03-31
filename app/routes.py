@@ -2,6 +2,7 @@ from flask import render_template, make_response, request, current_app as app
 from flask import url_for, flash, redirect
 from werkzeug.utils import secure_filename
 import os
+from .forms import RegistrationForm, LoginForm
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -60,3 +61,22 @@ def imageupload():
                 return redirect(request.url)
 
     return render_template('imageupload.html')
+
+# Login/Registrations
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(f'Account created for {form.username.data}!', 'success')
+        return redirect(url_for('home'))
+    return render_template('register.html', title='Register', form=form)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        flash('Logged in!', 'success')
+        return redirect(url_for('home'))
+
+
+    return render_template('login.html', title='Login', form=form)
