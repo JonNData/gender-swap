@@ -8,7 +8,7 @@ class Config:
     """ Base configuration reading from .env file"""
     DEBUG = True
     # SECRET_KEY = os.getenv("SECRET_KEY")
-    # SQLALCHEMY_DATABASE_URI = os.getenv("DB_ADDRESS")
+    SQLALCHEMY_DATABASE_URI = os.getenv("DB_ADDRESS")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     UPLOAD_FOLDER = 'uploads'
     ALLOWED_EXTENSIONS = ["JPEG", "JPG", "PNG", "GIF"]
